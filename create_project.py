@@ -6,7 +6,7 @@ import shutil
 
 from utils import (join_path, show_usage, mkdir_if_not_exist, file_read, file_write, file_replace,
                    copy_file, copy_folder, copy_glob_files, file_rename, files_replace,
-                   copy_awtk_files, copy_app_sources, copy_app_assets, set_cmake_includes,
+                   copy_awtk_files, copy_app_sources, copy_app_assets, update_cmake_file,
                    config_get_app_full_name, config_get_app_name, config_get_sources,
                    config_get_includes, merge_and_check_config
                    )
@@ -50,7 +50,8 @@ def create_project(config, app_root_src):
     copy_app_sources(config, join_path(app_root_dst, 'src/app'), app_root_src)
     copy_app_assets(config, join_path(
         app_root_dst, 'assets/default/raw'), app_root_src)
-    set_cmake_includes(config, join_path(app_root_dst, "awtk_source.mk"))
+    update_cmake_file(config, join_path(app_root_dst, "awtk_source.mk"))
+    update_cmake_file(config, join_path(app_root_dst, "awtk_properties.mk"))
 
     show_result(app_name)
 

@@ -5,9 +5,17 @@
 #define IOS 1
 #endif/*IOS*/
 
+#ifndef HAS_SEM_OPEN
+#define HAS_SEM_OPEN
+#endif/*HAS_SEM_OPEN*/
+
 #ifndef APPLE
 #define APPLE 1 
 #endif/*APPLE*/
+
+#ifndef ASSETS_ZIP
+#define ASSETS_ZIP "./assets.zip"
+#endif /*ASSETS_ZIP*/
 
 #ifndef WITH_ASSET_LOADER_ZIP
 #define WITH_ASSET_LOADER_ZIP 1 
