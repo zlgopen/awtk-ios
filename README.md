@@ -46,4 +46,8 @@ open Xcode/awtk.xcodeproj
 
 后续过程和 demoui 完全一样。
 
+## 其它参考
 
+* [无证书真机调试](https://blog.csdn.net/zhenggaoxing/article/details/79042382)
+
+* [真机调试或打包](https://juejin.im/post/5d1c6b2051882541fc2e096e)
