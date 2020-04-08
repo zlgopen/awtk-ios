@@ -39,6 +39,7 @@ file(GLOB SDL_SOURCE_FILES
 	${SDL2_SOURCE_DIR}/src/filesystem/cocoa/*.m
 	${SDL2_SOURCE_DIR}/src/joystick/iphoneos/*.m
 	${SDL2_SOURCE_DIR}/src/file/cocoa/*.m
+	${SDL2_SOURCE_DIR}/src/render/*/*.m
 )
 
 file(GLOB AWTK_SOURCE_FILES
