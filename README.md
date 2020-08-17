@@ -22,7 +22,7 @@ cd awtk-ios
 * 创建CMakefile工程
 
 ```
-python create_project.py ../awtk/demos/demoui_build.json
+python create_project.py ../awtk/build.json
 ```
 
 * 生成Xcode工程

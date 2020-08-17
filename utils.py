@@ -10,6 +10,7 @@ def join_path(root, subdir):
 
 
 AWTK_DIR = join_path(os.getcwd(), '../awtk')
+
 print('AWTK_DIR:' + AWTK_DIR)
 
 
@@ -36,6 +37,7 @@ def file_write(name, content):
 
 
 def file_replace(name, sfrom, sto):
+    print("process:" + name);
     content = file_read(name)
     new_content = content.replace(sfrom, sto)
     file_write(name, new_content)
@@ -47,6 +49,24 @@ def copy_folder(src, dst):
         shutil.rmtree(dst)
     shutil.copytree(src, dst)
 
+def copy_folder_overwrite(src, dest, ignore=None):
+    print(src + " => " + dest);
+    if os.path.isdir(src):
+        if not os.path.isdir(dest):
+            os.makedirs(dest)
+        files = os.listdir(src)
+        if ignore is not None:
+            ignored = ignore(src, files)
+        else:
+            ignored = set()
+        for f in files:
+            if f not in ignored:
+                copy_folder_overwrite(os.path.join(src, f), 
+                                    os.path.join(dest, f), 
+                                    ignore)
+    else:
+        shutil.copyfile(src, dest)
+
 
 def copy_file(src, dst):
     print(src + '=>' + dst)
@@ -55,6 +75,7 @@ def copy_file(src, dst):
 
 
 def copy_glob_files(src, srcdir, dstdir):
+    print(src +  " =>"  +  dstdir);
     files = glob.glob(src)
     for f in files:
         dst = join_path(dstdir, f[len(srcdir)+1:])
@@ -107,7 +128,7 @@ def copy_app_assets(config, app_assets_dst, app_root_src):
 
 def update_cmake_file(config, filename):
     includes = config_get_includes(config)
-    sincludes = '${APP_SOURCE_DIR}/src\n  ${APP_SOURCE_DIR}/3rd\n'
+    sincludes = '${APP_SOURCE_DIR}/res\n ${APP_SOURCE_DIR}/src\n  ${APP_SOURCE_DIR}/3rd\n'
     for f in includes:
         sincludes += '  ${APP_SOURCE_DIR}/' + f + '\n'
     print('process ' + filename)
@@ -158,6 +179,12 @@ def config_get_cppflags(config):
         return config['cppflags']
     else:
         return ""
+
+def config_get_plugins(config):
+    if 'plugins' in config:
+        return config['plugins']
+    else:
+        return []
 
 
 def merge_and_check_config(config, platform):
