@@ -105,6 +105,10 @@
 #define HAS_PTHREAD 1 
 #endif/*HAS_PTHREAD*/
 
+#ifndef HAS_GET_TIME_US64
+#define HAS_GET_TIME_US64 1
+#endif/*HAS_GET_TIME_US64*/
+
 #define WITHOUT_GLAD
 
 #endif/*AWTK_CONFIG_H*/
