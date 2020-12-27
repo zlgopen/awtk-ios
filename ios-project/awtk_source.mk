@@ -56,9 +56,17 @@ file(GLOB AWTK_SOURCE_FILES
 	${AWTK_SOURCE_DIR}/src/blend/*.c
 	${AWTK_SOURCE_DIR}/src/clip_board/*.c
 	${AWTK_SOURCE_DIR}/src/font_loader/*.c
-    ${AWTK_SOURCE_DIR}/src/graphic_buffer/*.c
+  ${AWTK_SOURCE_DIR}/src/graphic_buffer/*.c
 	${AWTK_SOURCE_DIR}/src/ext_widgets/*.c
 	${AWTK_SOURCE_DIR}/src/ext_widgets/*/*.c
+	${AWTK_SOURCE_DIR}/src/custom_widgets/*.c
+	${AWTK_SOURCE_DIR}/src/custom_widgets/*/*.c
+	${AWTK_SOURCE_DIR}/src/custom_widgets/*.cpp
+	${AWTK_SOURCE_DIR}/src/custom_widgets/*/*.cpp
+	${AWTK_SOURCE_DIR}/src/custom_widgets/*.cc
+	${AWTK_SOURCE_DIR}/src/custom_widgets/*/*.cc
+	${AWTK_SOURCE_DIR}/src/custom_widgets/*.cxx
+	${AWTK_SOURCE_DIR}/src/custom_widgets/*/*.cxx
 	${AWTK_SOURCE_DIR}/src/image_loader/*.c
 	${AWTK_SOURCE_DIR}/src/widget_animators/*.c
 	${AWTK_SOURCE_DIR}/src/window_animators/*.c
@@ -94,6 +102,7 @@ include_directories(${SDL2_SOURCE_DIR}/include
   ${AWTK_SOURCE_DIR}/3rd/nanovg/base
   ${AWTK_SOURCE_DIR}/3rd/libunibreak
   ${AWTK_SOURCE_DIR}/src/ext_widgets
+  ${AWTK_SOURCE_DIR}/src/custom_widgets
   ${AWTK_PORT_SOURCE_DIR}/
   EXTRA_INCLUDES
 )
