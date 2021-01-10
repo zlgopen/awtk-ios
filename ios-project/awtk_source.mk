@@ -54,6 +54,7 @@ file(GLOB AWTK_SOURCE_FILES
 	${AWTK_SOURCE_DIR}/src/xml/*.c
 	${AWTK_SOURCE_DIR}/src/svg/*.c
 	${AWTK_SOURCE_DIR}/src/blend/*.c
+	${AWTK_SOURCE_DIR}/src/fscript_ext/*.c
 	${AWTK_SOURCE_DIR}/src/clip_board/*.c
 	${AWTK_SOURCE_DIR}/src/font_loader/*.c
   ${AWTK_SOURCE_DIR}/src/graphic_buffer/*.c
