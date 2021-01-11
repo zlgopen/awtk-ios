@@ -80,6 +80,7 @@ file(GLOB AWTK_SOURCE_FILES
 	${AWTK_SOURCE_DIR}/src/streams/mem/*.c
 	${AWTK_SOURCE_DIR}/src/streams/file/*.c
 	${AWTK_SOURCE_DIR}/src/streams/inet/*.c
+	${AWTK_SOURCE_DIR}/src/streams/serial/*.c
 	${AWTK_SOURCE_DIR}/src/input_methods/*.c
 	${AWTK_SOURCE_DIR}/src/conf_io/*.c
 	${AWTK_SOURCE_DIR}/src/charset/*.c
