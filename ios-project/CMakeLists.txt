@@ -51,6 +51,9 @@ include(awtk_frameworks.mk)
 # Turn on ARC
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fobjc-arc")
 
+# enable cxx17
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++17 ")
+
 # Create the app target
 set_target_properties(${APP_NAME} PROPERTIES
                       XCODE_ATTRIBUTE_DEBUG_INFORMATION_FORMAT "dwarf-with-dsym"
