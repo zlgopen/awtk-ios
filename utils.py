@@ -74,13 +74,27 @@ def copy_file(src, dst):
     shutil.copy(src, dst)
 
 
+
+def get_prefix_of_2path(s1, s2):
+    i = 0;
+    l1 = len(s1)
+    l2 = len(s2)
+    n = min(l1,l2)
+    for i in range(n):
+        if s1[i] != s2[i]:
+            s = s1[0:i]
+            return len(os.path.dirname(s))
+
+    return n
+
 def copy_glob_files(src, srcdir, dstdir):
     print(src +  " =>"  +  dstdir);
     files = glob.glob(src)
     for f in files:
-        dst = join_path(dstdir, f[len(srcdir)+1:])
+        prefix = get_prefix_of_2path(f, srcdir); 
+        dst = join_path(dstdir, f[prefix+1:])
+        print(f +  " =>"  +  dst);
         copy_file(f, dst)
-
 
 def file_rename(src, dst):
     if src != dst:
@@ -122,9 +136,12 @@ def copy_app_sources(config, app_sources_dst, app_root_src):
 
 def copy_app_assets(config, app_assets_dst, app_root_src):
     assets_dir = config['assets']
-    sfrom = join_path(app_root_src, assets_dir + '/default/raw')
-    copy_folder(sfrom, app_assets_dst)
-
+    themes = config_get_themes(config)
+    for t in themes:
+      print("copy theme:");
+      src = join_path(app_root_src, assets_dir + "/" + t + '/raw');
+      dst = join_path(app_assets_dst, t + '/raw');
+      copy_folder(src, dst)
 
 def update_cmake_file(config, filename):
     includes = config_get_includes(config)
@@ -161,6 +178,13 @@ def config_get_includes(config):
         return config['includes']
     else:
         return []
+
+def config_get_themes(config):
+    if 'themes' in config:
+        return config['themes']
+    else:
+        return ["default"]
+
 
 def config_get_cflags(config):
     if 'cflags' in config:

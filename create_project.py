@@ -49,7 +49,7 @@ def create_project(config, app_root_src):
     copy_awtk_files(join_path(app_root_dst, 'src/awtk'))
     copy_app_sources(config, join_path(app_root_dst, 'src/app'), app_root_src)
     copy_app_assets(config, join_path(
-        app_root_dst, 'assets/default/raw'), app_root_src)
+        app_root_dst, 'assets'), app_root_src)
     update_cmake_file(config, join_path(app_root_dst, "awtk_source.mk"))
     update_cmake_file(config, join_path(app_root_dst, "awtk_properties.mk"))
 
