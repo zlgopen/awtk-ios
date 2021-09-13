@@ -85,6 +85,10 @@
 #define WITH_NANOVG_GLES2 1 
 #endif/*WITH_NANOVG_GLES2*/
 
+#ifndef WITH_GPU_GLES2
+#define WITH_GPU_GLES2 1 
+#endif/*WITH_GPU_GLES2*/
+
 #ifndef WITH_NANOVG_GL
 #define WITH_NANOVG_GL 1 
 #endif/*WITH_NANOVG_GL*/
