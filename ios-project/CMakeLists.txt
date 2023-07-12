@@ -6,7 +6,7 @@ set(DEVELOPMENT_TEAM_ID "AAAAAAAAAA")         # <== Set to your team ID from App
 set(CODE_SIGN_IDENTITY "iPhone Developer")      # <== Set to your preferred code sign identity, to see list:
 set(APP_BUNDLE_IDENTIFIER "org.zlgopen.awtktemplate")  # <== Set to your app's bundle identifier
                                                 # /usr/bin/env xcrun security find-identity -v -p codesigning
-set(DEPLOYMENT_TARGET 8.0)                      # <== Set your deployment target version of iOS
+set(DEPLOYMENT_TARGET 11.0)                      # <== Set your deployment target version of iOS
 set(DEVICE_FAMILY "1")                          # <== Set to "1" to target iPhone, set to "2" to target iPad, set to "1,2" to target both
 set(LOGIC_ONLY_TESTS 1)                         # <== Set to 1 if you do not want tests to be hosted by the application, speeds up pure logic tests but you can not run them on real devices
 

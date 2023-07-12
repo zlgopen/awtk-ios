@@ -87,6 +87,7 @@ file(GLOB AWTK_SOURCE_FILES
 	${AWTK_SOURCE_DIR}/src/lcd/lcd_nanovg.c
 	${AWTK_SOURCE_DIR}/src/main_loop/main_loop_simple.c
 	${AWTK_SOURCE_DIR}/src/main_loop/main_loop_sdl.c
+	${AWTK_SOURCE_DIR}/src/main_loop/main_loop_console.c
 	${AWTK_SOURCE_DIR}/src/platforms/pc/*.c
 	${AWTK_SOURCE_DIR}/src/vgcanvas/vgcanvas_nanovg_gl.c)
 
