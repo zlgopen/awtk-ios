@@ -3,7 +3,7 @@ import sys
 import glob
 import json
 import shutil
-
+import config_helper as helper
 
 def join_path(root, subdir):
     return os.path.abspath(os.path.normpath(os.path.join(root, subdir)))
@@ -211,10 +211,8 @@ def config_get_plugins(config):
         return []
 
 
-def merge_and_check_config(config, platform):
-    for key in config[platform]:
-        config[key] = config[platform][key]
-
+def load_config(filename, platform):
+    config = helper.load_app_config(filename, platform);
     app_full_name = config_get_app_full_name(config)
     items = app_full_name.split('.')
 
