@@ -100,6 +100,7 @@ include_directories(${SDL2_SOURCE_DIR}/include
   ${AWTK_SOURCE_DIR}/src
   ${AWTK_SOURCE_DIR}/3rd
   ${AWTK_SOURCE_DIR}/3rd/glad
+  ${AWTK_SOURCE_DIR}/3rd/miniz
   ${AWTK_SOURCE_DIR}/3rd/nanovg
   ${AWTK_SOURCE_DIR}/3rd/nanovg/gl
   ${AWTK_SOURCE_DIR}/3rd/nanovg/base
