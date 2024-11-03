@@ -4,29 +4,21 @@ import glob
 import json
 import shutil
 
-from utils import (join_path, show_usage, mkdir_if_not_exist, file_read, file_write, file_replace,
-                   copy_file, copy_folder, copy_glob_files, file_rename, files_replace,
-                   copy_awtk_files, copy_app_sources, copy_app_assets, update_cmake_file,
-                   config_get_app_full_name, config_get_app_name, config_get_sources,
-                   config_get_includes, load_config
-                   )
+AWTK_ROOT = os.path.normpath(os.path.abspath(os.path.join(os.getcwd(), "../awtk")))
+sys.path.append(os.path.join(AWTK_ROOT, "scripts"))
+
+import mobile_project_helper as helper
+
+WORK_DIR = os.path.abspath(os.path.normpath(os.getcwd()))
+BUILD_DIR = helper.join_path(WORK_DIR, "build")
+TEMPLATE_DIR = helper.join_path(WORK_DIR, "ios-project")
+
+print("WORK_DIR:" + WORK_DIR)
 
 
-AWTK_IOS_DIR = os.path.abspath(os.path.normpath(os.getcwd()))
-BUILD_DIR = join_path(AWTK_IOS_DIR, 'build')
-TEMPLATE_DIR = join_path(AWTK_IOS_DIR, 'ios-project')
-
-print('AWTK_IOS_DIR:' + AWTK_IOS_DIR)
-
-
-def show_usage():
-    print('Usage: python create_proj.py app.json')
-    sys.exit(0)
-
-
-def rename_files_content(app_root_dst, app_full_name, app_name):
-    files = ['CMakeLists.txt']
-    files_replace(files, app_root_dst, app_full_name, app_name)
+def replace_files_content(app_root_dst, config):
+    files = ["CMakeLists.txt"]
+    helper.files_replace_with_config(files, app_root_dst, config)
 
 
 def show_result(app_name):
@@ -38,29 +30,37 @@ def show_result(app_name):
     print("====================================================")
 
 
+def copy_app_icon(app_icon, app_root_dst):
+    if os.path.exists(app_icon):
+        print(app_icon)
+
+
 def create_project(config, app_root_src):
-    app_name = config_get_app_name(config)
-    app_full_name = config_get_app_full_name(config)
-    app_root_dst = join_path(BUILD_DIR, app_name)
+    app_name = helper.config_get_app_name(config)
+    app_root_dst = helper.join_path(BUILD_DIR, app_name)
+    app_icon = helper.join_path(app_root_src, helper.config_get_app_icon(config))
+    awtk_dst_source_dir = helper.join_path(app_root_dst, "src/awtk")
+    app_dst_source_dir = helper.join_path(app_root_dst, "src/app")
+    assets_dst_dir = "assets.zip"
 
-    copy_folder(TEMPLATE_DIR, app_root_dst)
-    rename_files_content(app_root_dst, app_full_name, app_name)
+    copy_app_icon(app_icon, app_root_dst)
+    helper.copy_folder(TEMPLATE_DIR, app_root_dst)
+    replace_files_content(app_root_dst, config)
+    helper.copy_awtk_files(awtk_dst_source_dir)
+    helper.copy_app_sources(config, app_dst_source_dir, app_root_src)
+    helper.create_assets_zip(app_root_src, app_root_dst, assets_dst_dir)
 
-    copy_awtk_files(join_path(app_root_dst, 'src/awtk'))
-    copy_app_sources(config, join_path(app_root_dst, 'src/app'), app_root_src)
-    copy_app_assets(config, join_path(
-        app_root_dst, 'assets'), app_root_src)
-    update_cmake_file(config, join_path(app_root_dst, "awtk_source.mk"))
-    update_cmake_file(config, join_path(app_root_dst, "awtk_properties.mk"))
+    helper.update_cmake_file(config, helper.join_path(app_root_dst, "awtk_source.mk"))
+    helper.update_cmake_file(config, helper.join_path(app_root_dst, "awtk_properties.mk"))
 
     show_result(app_name)
 
 
-app_json = ''
+app_json = ""
 if len(sys.argv) < 2:
-    show_usage()
+    helper.show_usage()
 else:
     app_json = os.path.abspath(sys.argv[1])
 
-config = load_config(app_json, 'ios')
+config = helper.load_config(app_json, "ios")
 create_project(config, os.path.dirname(app_json))

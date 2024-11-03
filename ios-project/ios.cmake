@@ -8,10 +8,16 @@ set (IOS True)
 set (CMAKE_OSX_DEPLOYMENT_TARGET "" CACHE STRING "Force unset of the deployment target for iOS" FORCE)
 
 # Determine the cmake host system version so we know where to find the iOS SDKs
-find_program (CMAKE_UNAME uname /bin /usr/bin /usr/local/bin)
+find_program(CMAKE_UNAME uname /bin /usr/bin /usr/local/bin)
+
 if (CMAKE_UNAME)
-	exec_program(uname ARGS -r OUTPUT_VARIABLE CMAKE_HOST_SYSTEM_VERSION)
-	STRING (REGEX REPLACE "^([0-9]+)\\.([0-9]+).*$" "\\1" DARWIN_MAJOR_VERSION "${CMAKE_HOST_SYSTEM_VERSION}")
+  execute_process(
+    COMMAND ${CMAKE_UNAME} -r
+    OUTPUT_VARIABLE CMAKE_HOST_SYSTEM_VERSION
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+  )
+
+  string(REGEX REPLACE "^([0-9]+)\\.([0-9]+).*$" "\\1" DARWIN_MAJOR_VERSION "${CMAKE_HOST_SYSTEM_VERSION}")
 endif (CMAKE_UNAME)
 
 # Force the compilers to Clang for iOS
@@ -124,7 +130,7 @@ set (CMAKE_OSX_SYSROOT ${CMAKE_IOS_SDK_ROOT} CACHE PATH "Sysroot used for iOS su
 
 # set the architecture for iOS 
 if (IOS_PLATFORM STREQUAL "OS")
-    set (IOS_ARCH armv7 armv7s arm64)
+    set (IOS_ARCH arm64)
 elseif (IOS_PLATFORM STREQUAL "SIMULATOR")
     set (IOS_ARCH i386)
 elseif (IOS_PLATFORM STREQUAL "SIMULATOR64")
