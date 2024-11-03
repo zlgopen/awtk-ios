@@ -1,3 +1,3 @@
 rm -rf Xcode
 
-cmake -DCMAKE_TOOLCHAIN_FILE=./ios.cmake -DIOS_PLATFORM=OS -H. -BXcode -GXcode
+cmake -Wno-dev -DCMAKE_TOOLCHAIN_FILE=./ios.cmake -DIOS_PLATFORM=OS -H. -BXcode -GXcode
