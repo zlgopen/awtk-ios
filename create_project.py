@@ -39,14 +39,15 @@ def create_project(config, app_root_src):
     app_name = helper.config_get_app_name(config)
     app_root_dst = helper.join_path(BUILD_DIR, app_name)
     app_icon = helper.join_path(app_root_src, helper.config_get_app_icon(config))
-    awtk_dst_source_dir = helper.join_path(app_root_dst, "src/awtk")
-    app_dst_source_dir = helper.join_path(app_root_dst, "src/app")
+    awtk_dst_source_dir = helper.join_path(app_root_dst, "awtk")
+    app_dst_source_dir = helper.join_path(app_root_dst, "app")
     assets_dst_dir = "assets.zip"
 
     copy_app_icon(app_icon, app_root_dst)
     helper.copy_folder(TEMPLATE_DIR, app_root_dst)
     replace_files_content(app_root_dst, config)
     helper.copy_awtk_files(awtk_dst_source_dir)
+    helper.copy_file(helper.join_path(AWTK_ROOT, "scripts/awtk_mobile_common.mk"), helper.join_path(app_root_dst, "awtk_common.mk"))
     helper.copy_app_sources(config, app_dst_source_dir, app_root_src)
     helper.create_assets_zip(app_root_src, app_root_dst, assets_dst_dir)
 
