@@ -26,7 +26,6 @@ def show_result(app_name):
     print("project is created at: build/" + app_name)
     print("to build: ")
     print("  cd build/" + app_name + " && ./generate-project.sh")
-    print("  open Xcode/awtk.xcodeproj")
     print("====================================================")
 
 
@@ -51,6 +50,7 @@ def create_project(config, app_root_src):
     helper.copy_app_sources(config, app_dst_source_dir, app_root_src)
     helper.create_assets_zip(app_root_src, app_root_dst, assets_dst_dir)
 
+    helper.update_cmake_file(config, helper.join_path(app_root_dst, "CMakeLists.txt"))
     helper.update_cmake_file(config, helper.join_path(app_root_dst, "awtk_source.mk"))
     helper.update_cmake_file(config, helper.join_path(app_root_dst, "awtk_properties.mk"))
 

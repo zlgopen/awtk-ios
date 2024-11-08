@@ -41,6 +41,7 @@ add_executable(
     ${AWTK_ALL_SOURCE} 
     ${RESOURCES}
 )
+target_link_libraries(${APP_NAME} "-liconv -lpthread -lm")
 
 include(awtk_properties.mk)
 include(awtk_frameworks.mk)
@@ -48,11 +49,13 @@ include(awtk_frameworks.mk)
 # To disable bitcode:
 # set_target_properties(${APP_NAME} PROPERTIES XCODE_ATTRIBUTE_ENABLE_BITCODE "NO")
 
-# Turn on ARC
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fobjc-arc")
+set(AWTK_IOS_FLAGS " -DIOS -DMACOS -Os -g ${AWTK_VGCANVAS_NANOVG_GLES2_FLAGS}")
+set(AWTK_IOS_FLAGS "${AWTK_IOS_FLAGS} -DASSETS_ZIP=\\\"./assets.zip\\\" -DWITH_ASSET_LOADER_ZIP=1 ") 
+set(SDL_FLAGS "-DSDL2 -DWITH_SDL -DSDL_VIDEO_OPENGL_EGL -DSDL_VIDEO_OPENGL_ES2  -DSDL_TIMER_UNIX  -DGL_GLEXT_PROTOTYPES ")
+set(AWTK_FLAGS "${AWTK_COMMON_FLAGS} ${AWTK_IOS_FLAGS} ${SDL_FLAGS}")
+set(CMAKE_C_FLAGS "${AWTK_FLAGS} EXTRA_CFLAGS")
+set(CMAKE_CXX_FLAGS "--std=c++17 -fobjc-arc ${AWTK_FLAGS} EXTRA_CPPFLAGS")
 
-# enable cxx17
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++17 ")
 
 # Create the app target
 set_target_properties(${APP_NAME} PROPERTIES
