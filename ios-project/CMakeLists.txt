@@ -41,7 +41,7 @@ add_executable(
     ${AWTK_ALL_SOURCE} 
     ${RESOURCES}
 )
-target_link_libraries(${APP_NAME} "-liconv -lpthread -lm")
+target_link_libraries(${APP_NAME} EXTRA_LINK_FLAGS "-liconv -lpthread -lm")
 
 include(awtk_properties.mk)
 include(awtk_frameworks.mk)
