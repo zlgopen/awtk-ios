@@ -41,7 +41,7 @@ add_executable(
     ${AWTK_ALL_SOURCE} 
     ${RESOURCES}
 )
-target_link_libraries(${APP_NAME} EXTRA_LINK_FLAGS "-liconv -lpthread -lm")
+target_link_libraries(${APP_NAME} "-liconv -lpthread -lm")
 
 include(awtk_properties.mk)
 include(awtk_frameworks.mk)
@@ -55,6 +55,8 @@ set(SDL_FLAGS "-DSDL2 -DWITH_SDL -DSDL_VIDEO_OPENGL_EGL -DSDL_VIDEO_OPENGL_ES2  
 set(AWTK_FLAGS "${AWTK_COMMON_FLAGS} ${AWTK_IOS_FLAGS} ${SDL_FLAGS}")
 set(CMAKE_C_FLAGS "${AWTK_FLAGS} EXTRA_CFLAGS")
 set(CMAKE_CXX_FLAGS "--std=c++17 -fobjc-arc ${AWTK_FLAGS} EXTRA_CPPFLAGS")
+set(CMAKE_C_LINK_FLAGS "${CMAKE_C_LINK_FLAGS} EXTRA_LINK_FLAGS")
+set(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} EXTRA_LINK_FLAGS")
 
 
 # Create the app target
